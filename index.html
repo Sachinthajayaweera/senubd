@@ -1443,13 +1443,20 @@ function renderTasks() {
 function completeTask(idx) {
   if (idx !== currentTask) return;
   currentTask++;
+  
   if (currentTask >= tasks.length) {
     renderTasks();
     document.getElementById('tasks-list').style.display = 'none';
     document.getElementById('tasks-complete').style.display = 'block';
     spawnMiniConfetti();
+    
+    // This line handles the automatic scroll to the cake section
+    setTimeout(() => {
+      scrollToSection('wish');
+    }, 0); 
     return;
   }
+  
   renderTasks();
   setTimeout(() => {
     const next = document.getElementById(`task-${currentTask}`);
